@@ -243,7 +243,7 @@ impl<'a> EthernetDataLinkChannelIterator<'a> for DataLinkChannelIteratorImpl<'a>
                 events: POLLIN,
                 revents: 0,
             };
-            if unsafe { ppoll(&mut fds, 1, self.timeout, ptr::null()) } < 0 {
+            if unsafe { ppoll(&mut fds, 1, self.pc.timeout, ptr::null()) } < 0 {
                 return Err(io::Error::last_os_error());
             }
             buf = unsafe { nm_nextpkt(desc, &mut h) };
