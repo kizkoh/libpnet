@@ -107,8 +107,8 @@ pub struct Config {
 impl<'a> From<&'a datalink::Config> for Config {
     fn from(_config: &datalink::Config) -> Config {
         Config {
-            read_timeout: config.read_timeout,
-            write_timeout: config.write_timeout,
+            read_timeout: _config.read_timeout,
+            write_timeout: _config.write_timeout,
         }
     }
 }
