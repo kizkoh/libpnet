@@ -65,6 +65,9 @@ struct NmDesc {
 unsafe impl Send for NmDesc {}
 unsafe impl Sync for NmDesc {}
 
+unsafe impl Send for DataLinkSenderImpl {}
+unsafe impl Send for DataLinkReceiverImpl {}
+
 impl NmDesc {
     fn new(iface: &NetworkInterface) -> io::Result<NmDesc> {
         let ifname = CString::new(("netmap:".to_owned() + &iface.name[..]).as_bytes());
