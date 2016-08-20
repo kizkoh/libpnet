@@ -26,6 +26,7 @@ use std::mem;
 use std::ptr;
 use std::slice;
 use std::sync::Arc;
+use std::time::Duration;
 
 use datalink::{self, NetworkInterface};
 use datalink::Channel::Ethernet;
