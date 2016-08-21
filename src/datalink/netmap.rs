@@ -182,7 +182,7 @@ impl EthernetDataLinkSender for DataLinkSenderImpl {
         let mut packet_idx = 0usize;
         while packet_idx < num_packets {
             unsafe {
-                if ppoll(&mut fds, 1, self.timeout, ptr::null()) < 0 {
+                if ppoll(&mut fds, 1, 1, ptr::null()) < 0 {
                     return Some(Err(io::Error::last_os_error()));
                 }
                 let ring = NETMAP_TXRING((*desc).nifp, 0);
@@ -246,7 +246,7 @@ impl<'a> EthernetDataLinkChannelIterator<'a> for DataLinkChannelIteratorImpl<'a>
                 events: POLLIN,
                 revents: 0,
             };
-            if unsafe { ppoll(&mut fds, 1, self.pc.timeout, ptr::null()) } < 0 {
+            if unsafe { ppoll(&mut fds, 1, 1, ptr::null()) } < 0 {
                 return Err(io::Error::last_os_error());
             }
             buf = unsafe { nm_nextpkt(desc, &mut h) };
